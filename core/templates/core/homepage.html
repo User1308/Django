@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+{% for category in categories %}
+{{ category }}
+<ul>
+  {% for book in category.book_set.all %}
+  <li>
+    <a href="{{ book.get_absolute_url }}">{{ book }}</a>
+  </li>
+
+  {% endfor %}
+</ul>
+
+{% endfor %}
+{% endblock content %}

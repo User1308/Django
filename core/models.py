@@ -1,4 +1,6 @@
 from django.db import models
+from django.shortcuts import redirect, reverse
+from django.urls import reverse_lazy
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -20,6 +22,9 @@ class Book(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+    
+    def get_absolute_url(self):
+        return reverse('book-detail', kwargs={'slug': self.slug})
 
 class Chapter(models.Model):
 
